@@ -1,13 +1,12 @@
 <?xml version="1.0"?>   
-<project name="hello" default="junit" basedir=".">
+<project name="hello" default="clean" basedir=".">
 
   <property name="main.build.dir" value="build/main" />  
   <property name="main.src.dir" value="src" />
   <property name="test.build.dir" value="build/test" />
   <property name="test.src.dir" value="test" />
   <property name="junit.dir" value="junit-results"/>
-  <property name="junit.html" value="html"/>
-  
+   
 <path id="classpath.base" />
 
   <path id="classpath.test">
@@ -22,8 +21,7 @@
 	<mkdir dir="${junit.dir}"/>
 	<mkdir dir="${main.build.dir}"/>
 	<mkdir dir="${test.build.dir}"/>
-	<mkdir dir="${junit.html}"/>
-   </target>
+</target>
 
 
 <target name="compile" depends="init">
@@ -61,13 +59,13 @@
   <fileset dir="${junit.dir}">
    <include name="TESTS-*.xml" />
   </fileset>
-  <report format="frames" todir="${junit.html}" />
+  <report format="frames" todir="${junit.dir}" />
  </junitreport>
 
 </target>
  
 
-<target name="clean" description="clean up" >
+<target name="clean" depends="junit">
     <delete dir="${main.build.dir}"/>
     <delete dir="${test.build.dir}"/>
     <delete dir="${junit.dir}"/>
